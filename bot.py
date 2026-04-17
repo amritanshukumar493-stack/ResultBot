@@ -24,7 +24,7 @@ threading.Thread(target=run_fake_server, daemon=True).start()
 # --- RENDER PORT FIX END ---
 
 # 🔑 TOKEN: Render ke Environment Variables se uthayega
-TOKEN = os.getenv('TOKEN', '8778371629:AAGjlowv2RNdipnw44REAndkGCEEGFaHrro')
+TOKEN = '8778371629:AAEsTf0wX0ql4_oUDTp1HpgXkcXQgEr7XNc'
 
 # States
 NAME, SCORE, SCHOOL, DISTRICT = range(4)
