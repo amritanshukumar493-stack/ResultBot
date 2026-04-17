@@ -24,9 +24,9 @@ threading.Thread(target=run_fake_server, daemon=True).start()
 # --- RENDER PORT FIX END ---
 
 # 🔑 TOKEN: Render ke Environment Variables se uthayega
-TOKEN = '8778371629:AAEsTf0wX0ql4_oUDTp1HpgXkcXQgEr7XNc'
+TOKEN = '8778371629:AAGjlowv2RNdipnw44REAndkGCEEGFaHrro'
 
-# States
+# States8778371629:AAGjlowv2RNdipnw44REAndkGCEEGFaHrro
 NAME, SCORE, SCHOOL, DISTRICT = range(4)
 
 # Database (Note: Render restart hone par ye khali ho jayega)
