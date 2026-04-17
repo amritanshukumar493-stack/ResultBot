@@ -1,14 +1,35 @@
 import logging
+import os
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes, ConversationHandler
 
-# 🔑 TERA OFFICIAL TOKEN
-TOKEN = '8778371629:AAEsTf0wX0ql4_oUDTp1HpgXkcXQgEr7XNc' # Maine ye placeholder rakha hai, apna asli token yahan paste kar dena
+# --- RENDER PORT FIX (FAKE SERVER) START ---
+class SimpleHandler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Bot is Running 24/7")
+
+def run_fake_server():
+    # Render hamesha PORT environment variable bhejta hai
+    port = int(os.environ.get("PORT", 8080))
+    server = HTTPServer(('0.0.0.0', port), SimpleHandler)
+    print(f"Fake server started on port {port}")
+    server.serve_forever()
+
+# Background thread mein server chalao taki bot block na ho
+threading.Thread(target=run_fake_server, daemon=True).start()
+# --- RENDER PORT FIX END ---
+
+# 🔑 TOKEN: Render ke Environment Variables se uthayega
+TOKEN = os.getenv('TOKEN', '8778371629:AAGjlowv2RNdipnw44REAndkGCEEGFaHrro')
 
 # States
 NAME, SCORE, SCHOOL, DISTRICT = range(4)
 
-# Database (Temporary Memory)
+# Database (Note: Render restart hone par ye khali ho jayega)
 user_data = {}
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -125,9 +146,8 @@ def main():
     app.add_handler(CommandHandler("rank", leaderboard))
     app.add_handler(CommandHandler("district", district_rank))
     
-    print("Bot is running as @ResultRanker2026Bot...")
+    print("Bot is running...")
     app.run_polling()
 
 if __name__ == '__main__':
     main()
-  
